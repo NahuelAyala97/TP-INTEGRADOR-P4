@@ -158,7 +158,7 @@ pnpm build
 
 Video del funcionamiento:
 
-**Enlace:** [AGREGAR ENLACE DEL VIDEO]
+**Enlace:** https://www.youtube.com/watch?v=1YRxRJChlqM
 
 La demostración incluye registro, inicio de sesión, compra, administración de pedidos y cancelación con restitución del stock.
 
