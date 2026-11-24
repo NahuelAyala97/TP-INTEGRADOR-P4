@@ -1,0 +1,12 @@
+# Variables privadas
+.env
+
+# Entorno virtual
+.venv/
+
+# Archivos generados por Python
+__pycache__/
+*.pyc
+
+# Archivos de pruebas
+.pytest_cache/

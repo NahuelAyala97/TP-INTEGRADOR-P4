@@ -1,0 +1,119 @@
+@baseUrl = http://127.0.0.1:8000
+@pedidoId = 1
+@productoId1 = 1
+@productoId2 = 2
+
+
+### Listar todos los pedidos
+GET {{baseUrl}}/pedidos/
+
+
+### Crear un pedido con dos productos - 201
+POST {{baseUrl}}/pedidos/
+Content-Type: application/json
+
+{
+  "detalles": [
+    {
+      "producto_id": {{productoId1}},
+      "cantidad": 2
+    },
+    {
+      "producto_id": {{productoId2}},
+      "cantidad": 3
+    }
+  ]
+}
+
+
+### Buscar un pedido por ID - 200
+GET {{baseUrl}}/pedidos/{{pedidoId}}
+
+
+### Actualizar el estado de un pedido - 200
+PUT {{baseUrl}}/pedidos/{{pedidoId}}
+Content-Type: application/json
+
+{
+  "estado": "CONFIRMADO"
+}
+
+
+### Crear pedido con producto inexistente - 404
+POST {{baseUrl}}/pedidos/
+Content-Type: application/json
+
+{
+  "detalles": [
+    {
+      "producto_id": {{productoId1}},
+      "cantidad": 2
+    },
+    {
+      "producto_id": 999999,
+      "cantidad": 1
+    }
+  ]
+}
+
+
+### Crear pedido con productos repetidos - 422
+POST {{baseUrl}}/pedidos/
+Content-Type: application/json
+
+{
+  "detalles": [
+    {
+      "producto_id": {{productoId1}},
+      "cantidad": 2
+    },
+    {
+      "producto_id": {{productoId1}},
+      "cantidad": 3
+    }
+  ]
+}
+
+
+### Crear pedido sin detalles - 422
+POST {{baseUrl}}/pedidos/
+Content-Type: application/json
+
+{
+  "detalles": []
+}
+
+
+### Crear pedido con cantidad invalida - 422
+POST {{baseUrl}}/pedidos/
+Content-Type: application/json
+
+{
+  "detalles": [
+    {
+      "producto_id": {{productoId1}},
+      "cantidad": 0
+    }
+  ]
+}
+
+
+### Actualizar pedido con estado invalido - 422
+PUT {{baseUrl}}/pedidos/{{pedidoId}}
+Content-Type: application/json
+
+{
+  "estado": "PREPARANDO"
+}
+
+
+### Eliminar un pedido (borrado logico) - 204
+DELETE {{baseUrl}}/pedidos/{{pedidoId}}
+
+
+### Buscar un pedido eliminado - 404
+GET {{baseUrl}}/pedidos/{{pedidoId}}
+
+
+### Listar pedidos despues del borrado logico
+GET {{baseUrl}}/pedidos/
